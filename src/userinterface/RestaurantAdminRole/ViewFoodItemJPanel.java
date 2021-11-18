@@ -5,7 +5,7 @@
  */
 package userinterface.RestaurantAdminRole;
 
-import Business.Menu.FoodItem;
+import Business.Menu.FoodDetails;
 import Business.Menu.MenuDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -31,11 +31,11 @@ public class ViewFoodItemJPanel extends javax.swing.JPanel {
     File file;
     BufferedImage img;
     private JPanel container;
-    private FoodItem foodItem;
+    private FoodDetails foodItem;
     private MenuDirectory menuDirectory;
     //private ;
     
-    public ViewFoodItemJPanel(JPanel container,FoodItem foodItem, MenuDirectory menuDirectory) {
+    public ViewFoodItemJPanel(JPanel container,FoodDetails foodItem, MenuDirectory menuDirectory) {
         initComponents();
         this.container = container;
         this.foodItem = foodItem;

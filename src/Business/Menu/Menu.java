@@ -12,17 +12,17 @@ import java.util.ArrayList;
  * @author garima
  */
 public class Menu {
-    private ArrayList<FoodItem> foodMenu;
+    private ArrayList<FoodDetails> foodMenu;
     
     public Menu(){
-        foodMenu = new ArrayList<FoodItem>();
+        foodMenu = new ArrayList<FoodDetails>();
     }
 
-    public ArrayList<FoodItem> getMenu() {
+    public ArrayList<FoodDetails> getMenu() {
         return foodMenu;
     }
 
-    public void setMenu(ArrayList<FoodItem> menu) {
+    public void setMenu(ArrayList<FoodDetails> menu) {
         this.foodMenu = menu;
     }
     

@@ -10,8 +10,8 @@ import Business.DeliveryMan.DeliveryMan;
 import Business.DeliveryMan.DeliveryManDirectory;
 import Business.EcoSystem;
 import Business.Menu.MenuDirectory;
-import Business.Order.Order;
-import Business.Order.OrderDirectory;
+import Business.Order.Orders;
+import Business.Order.OrdersDirectory;
 import Business.Restaurant.RestaurantDirectory;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.WorkQueue;
@@ -38,9 +38,9 @@ public class ManageRestaurantOrderJPanel extends javax.swing.JPanel {
     private RestaurantDirectory restaurantDirectory;
     private DeliveryManDirectory deliveryManDirectory;
     private MenuDirectory menuDirectory;
-    private OrderDirectory orderDirectory;
+    private OrdersDirectory orderDirectory;
     
-    public ManageRestaurantOrderJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem business, RestaurantDirectory restaurantDirectory, DeliveryManDirectory deliveryManDirectory, MenuDirectory menuDirectory, OrderDirectory orderDirectory) {
+    public ManageRestaurantOrderJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem business, RestaurantDirectory restaurantDirectory, DeliveryManDirectory deliveryManDirectory, MenuDirectory menuDirectory, OrdersDirectory orderDirectory) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
@@ -57,7 +57,7 @@ public class ManageRestaurantOrderJPanel extends javax.swing.JPanel {
     public void populate() {
         DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
         model.setRowCount(0);
-        for (Order order : business.getOrderDirectory().getOrderDirectory()) {
+        for (Orders order : business.getOrderDirectory().getOrderDirectory()) {
             if (order.getRestaurant().getRestaurantId().equalsIgnoreCase(account.getEmployee().getName())) {
                 Object[] row = new Object[10];
                 row[0] = order.getMessage();
@@ -269,7 +269,7 @@ public class ManageRestaurantOrderJPanel extends javax.swing.JPanel {
         if (count == 1) {
             if (row >= 0) {
                 String id = (String) orderTable.getValueAt(row, 9);
-                Order order = business.getOrderDirectory().getOrderByOrderId(id);//orderDirectory.getOrderDirectory().get(row);
+                Orders order = business.getOrderDirectory().getOrderByOrderId(id);//orderDirectory.getOrderDirectory().get(row);
                 order.setStatus("Confirmed");
                 JOptionPane.showMessageDialog(null, "Order Confirmed!");
                 populate();
@@ -288,7 +288,7 @@ public class ManageRestaurantOrderJPanel extends javax.swing.JPanel {
         if(orderCount ==1 && deliverCount == 1){
             if (row >= 0) {
                 String orderId = (String) orderTable.getValueAt(row,9);
-            Order order = business.getOrderDirectory().getOrderByOrderId(orderId);
+            Orders order = business.getOrderDirectory().getOrderByOrderId(orderId);
             System.out.println(order.getStatus().trim());
             if (order.getStatus().trim().equalsIgnoreCase("Confirmed")) {
                 if(deliverCount == 1){

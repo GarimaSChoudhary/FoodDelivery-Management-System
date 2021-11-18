@@ -8,7 +8,7 @@ import Business.Customer.CustomerDirectory;
 import Business.DeliveryMan.DeliveryManDirectory;
 import Business.EcoSystem;
 import Business.Menu.MenuDirectory;
-import Business.Order.OrderDirectory;
+import Business.Order.OrdersDirectory;
 import Business.Restaurant.RestaurantDirectory;
 
 import Business.UserAccount.UserAccount;
@@ -23,7 +23,7 @@ public class SystemAdminRole extends Role{
 
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, EcoSystem system,
             CustomerDirectory customerDirectory, RestaurantDirectory restaurantDirectory,
-            DeliveryManDirectory deliveryManDirectory, MenuDirectory menuDirectory, OrderDirectory orderDirectory) {
+            DeliveryManDirectory deliveryManDirectory, MenuDirectory menuDirectory, OrdersDirectory orderDirectory) {
         return new SystemAdminWorkAreaJPanel(userProcessContainer, system, customerDirectory, restaurantDirectory, deliveryManDirectory,menuDirectory,orderDirectory);
     }
     

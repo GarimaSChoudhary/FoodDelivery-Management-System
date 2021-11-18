@@ -8,7 +8,7 @@ import Business.Customer.CustomerDirectory;
 import Business.DeliveryMan.DeliveryManDirectory;
 import Business.EcoSystem;
 import Business.Menu.MenuDirectory;
-import Business.Order.OrderDirectory;
+import Business.Order.OrdersDirectory;
 
 import Business.Organization;
 import Business.Restaurant.RestaurantDirectory;
@@ -49,7 +49,7 @@ public abstract class Role {
             RestaurantDirectory restaurantDirectory,
             DeliveryManDirectory deliveryManDirectory,
             MenuDirectory menuDirectory,
-            OrderDirectory orderDirectory);
+            OrdersDirectory orderDirectory);
 
     @Override
     public String toString() {

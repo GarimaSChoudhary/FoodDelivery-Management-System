@@ -9,7 +9,7 @@ import Business.Customer.CustomerDirectory;
 import Business.DeliveryMan.DeliveryManDirectory;
 import Business.EcoSystem;
 import Business.Menu.MenuDirectory;
-import Business.Order.OrderDirectory;
+import Business.Order.OrdersDirectory;
 
 import Business.Organization;
 import Business.Restaurant.RestaurantDirectory;
@@ -34,8 +34,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     RestaurantDirectory restaurantDirectory;
     DeliveryManDirectory deliveryManDirectory;
     MenuDirectory menuDirectory;
-    OrderDirectory orderDirectory;
-    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,EcoSystem ecosystem,CustomerDirectory customerDirectory, RestaurantDirectory restaurantDirectory,DeliveryManDirectory deliveryManDirectory,MenuDirectory menuDirectory, OrderDirectory orderDirectory) {
+    OrdersDirectory orderDirectory;
+    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,EcoSystem ecosystem,CustomerDirectory customerDirectory, RestaurantDirectory restaurantDirectory,DeliveryManDirectory deliveryManDirectory,MenuDirectory menuDirectory, OrdersDirectory orderDirectory) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;

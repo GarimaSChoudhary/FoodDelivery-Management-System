@@ -10,7 +10,7 @@ import Business.DB4OUtil.DB4OUtil;
 import Business.DeliveryMan.DeliveryManDirectory;
 import Business.Employee.EmployeeDirectory;
 import Business.Menu.MenuDirectory;
-import Business.Order.OrderDirectory;
+import Business.Order.OrdersDirectory;
 
 import Business.Organization;
 import Business.Restaurant.RestaurantDirectory;
@@ -40,7 +40,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private DeliveryManDirectory deliveryManDirectory;
     private EmployeeDirectory employeeDirectory;
     private MenuDirectory menuDirectory;
-    private OrderDirectory orderDirectory;
+    private OrdersDirectory orderDirectory;
     public MainJFrame() throws IOException {
         initComponents();
         setSize(1800,1400);
@@ -52,7 +52,7 @@ public class MainJFrame extends javax.swing.JFrame {
         deliveryManDirectory = new DeliveryManDirectory();
         employeeDirectory = new EmployeeDirectory();
         menuDirectory = new MenuDirectory();
-        //orderDirectory = new OrderDirectory();
+        //orderDirectory = new OrdersDirectory();
     }
 
     /**
@@ -208,7 +208,7 @@ public class MainJFrame extends javax.swing.JFrame {
             loginJButton.setEnabled(false);
        }
        else{
-           JOptionPane.showMessageDialog(null, "Username or password incorrect. Please try again.");
+           JOptionPane.showMessageDialog(null, "Please enter correct username and password.");
        }
 //       
     }//GEN-LAST:event_loginJButtonActionPerformed

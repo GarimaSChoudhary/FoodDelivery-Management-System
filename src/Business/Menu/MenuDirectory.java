@@ -13,27 +13,27 @@ import java.util.ArrayList;
  * @author garima
  */
 public class MenuDirectory {
-    private ArrayList<FoodItem> menuDirectory;
+    private ArrayList<FoodDetails> menuDirectory;
     
     public MenuDirectory(){
-        menuDirectory = new ArrayList<FoodItem>();
+        menuDirectory = new ArrayList<FoodDetails>();
     }
 
-    public ArrayList<FoodItem> getMenuDirectory() {
+    public ArrayList<FoodDetails> getMenuDirectory() {
         return menuDirectory;
     }
 
-    public void setMenuDirectory(ArrayList<FoodItem> menuDirectory) {
+    public void setMenuDirectory(ArrayList<FoodDetails> menuDirectory) {
         this.menuDirectory = menuDirectory;
     }
 
     public void add(String restaurantId, String name, String description,BufferedImage photo, double price) {
-        FoodItem item = new FoodItem("F"+(menuDirectory.size()+1),restaurantId,name,description,photo,price);
+        FoodDetails item = new FoodDetails("F"+(menuDirectory.size()+1),restaurantId,name,description,photo,price);
         menuDirectory.add(item);
     }
     
-    public FoodItem getFoodItem(String itemId){
-        for(FoodItem item: menuDirectory){
+    public FoodDetails getFoodItem(String itemId){
+        for(FoodDetails item: menuDirectory){
             if(item.getFoodItemId().equalsIgnoreCase(itemId)){
                 return item;
             }
@@ -42,7 +42,7 @@ public class MenuDirectory {
     }
 
     public void updateFoodItem(String itemId, String name, String description, Double price, BufferedImage img) {
-        for(FoodItem item: menuDirectory){
+        for(FoodDetails item: menuDirectory){
             if(item.getFoodItemId().equalsIgnoreCase(itemId)){
                 item.setFoodItemName(name);
                 item.setFoodDescription(description);
@@ -60,7 +60,7 @@ public class MenuDirectory {
         }
     }
     
-    public FoodItem getFoodItemByIndex(int index){
+    public FoodDetails getFoodItemByIndex(int index){
         return menuDirectory.get(index);
     }
 }

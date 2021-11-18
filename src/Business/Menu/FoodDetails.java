@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
  *
  * @author garima
  */
-public class FoodItem {
+public class FoodDetails {
     
     private String foodItemId;
     private String foodRestaurantId;
@@ -20,7 +20,7 @@ public class FoodItem {
     private BufferedImage foodPhoto;
     private double foodPrice;
 
-    public FoodItem(String foodItemId, String foodRestaurantId, String foodItemName, String foodDescription, BufferedImage foodPhoto, double foodPrice) {
+    public FoodDetails(String foodItemId, String foodRestaurantId, String foodItemName, String foodDescription, BufferedImage foodPhoto, double foodPrice) {
         this.foodItemId = foodItemId;
         this.foodRestaurantId = foodRestaurantId;
         this.foodItemName = foodItemName;
