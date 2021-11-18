@@ -35,16 +35,16 @@ public class ManageResturantInfoJPanel extends javax.swing.JPanel {
     File file;
     BufferedImage img;
     private JPanel container;
-    private UserAccount account;
+    private UserAccount userAccount;
     private EcoSystem system;
     private RestaurantDirectory restaurantDirectory;
     private MenuDirectory menuDirectory;
     private Restaurant restaurant;
 
-    public ManageResturantInfoJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem system, RestaurantDirectory restaurantDirectory, MenuDirectory menuDirectory) {
+    public ManageResturantInfoJPanel(JPanel userProcessContainer, UserAccount userAccount, EcoSystem system, RestaurantDirectory restaurantDirectory, MenuDirectory menuDirectory) {
         initComponents();
         this.container = userProcessContainer;
-        this.account = account;
+        this.userAccount = userAccount;
         this.system = system;
         this.restaurantDirectory = restaurantDirectory;
         this.menuDirectory = menuDirectory;
@@ -59,7 +59,7 @@ public class ManageResturantInfoJPanel extends javax.swing.JPanel {
         changePicBtn.setVisible(false);
 
         for (Restaurant rest : restaurantDirectory.getRestaurantDirectory()) {
-            if (rest.getRestaurantId().equalsIgnoreCase(account.getEmployee().getName())) {
+            if (rest.getRestaurantId().equalsIgnoreCase(userAccount.getEmployee().getName())) {
                 this.restaurant = rest;
             }
         }
@@ -71,6 +71,7 @@ public class ManageResturantInfoJPanel extends javax.swing.JPanel {
         contactTextField.setText(restaurant.getRestaurantPhoneNo());
         licenseTextField.setText(restaurant.getRestaurantLicenseNo());
         img = restaurant.getRestaurantPhoto();
+        
     }
 
     /**
@@ -100,25 +101,47 @@ public class ManageResturantInfoJPanel extends javax.swing.JPanel {
         saveBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
-        jLabel1.setText("Restaurant Info");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Restaurant Details");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Restaurant Id");
 
+        idTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        nameTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Restaurant Name");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Restaurant Contact No");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Restaurant Manager");
 
+        contactTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        managerTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Restaurant Address ");
 
+        addressTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        licenseTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Restaurant License No");
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("Change Picture");
 
+        changePicBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         changePicBtn.setText("Choose");
         changePicBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,6 +149,7 @@ public class ManageResturantInfoJPanel extends javax.swing.JPanel {
             }
         });
 
+        saveBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         saveBtn.setText("Save Changes");
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,6 +157,7 @@ public class ManageResturantInfoJPanel extends javax.swing.JPanel {
             }
         });
 
+        editBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         editBtn.setText("Edit");
         editBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,26 +176,24 @@ public class ManageResturantInfoJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(23, 23, 23)
+                        .addComponent(editBtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(180, 180, 180)
+                        .addComponent(saveBtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(editBtn)
-                                .addComponent(jLabel8)))
-                        .addGap(69, 600, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(jLabel1))
+                            .addComponent(jLabel8)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(91, 91, 91)
@@ -181,24 +204,26 @@ public class ManageResturantInfoJPanel extends javax.swing.JPanel {
                                     .addComponent(managerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(addressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(licenseTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(changePicBtn)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(saveBtn)
-                                .addGap(25, 25, 25)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(changePicBtn)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(jLabel1)))
+                .addGap(110, 430, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton1))
+                .addComponent(jButton1)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -222,17 +247,18 @@ public class ManageResturantInfoJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(changePicBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(changePicBtn)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveBtn)
                     .addComponent(editBtn))
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(323, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-        // TODO add your handling code here:
+       
         idTextField.setEditable(false);
         nameTextField.setEditable(true);
         managerTextField.setEditable(true);
@@ -243,10 +269,11 @@ public class ManageResturantInfoJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void changePicBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePicBtnActionPerformed
-        // TODO add your handling code here:
+        
         chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         file = chooser.getSelectedFile();
+        jLabel9.setText(file.toString());
         try {
             img = ImageIO.read(file);
         } catch (IOException e) {
@@ -255,27 +282,27 @@ public class ManageResturantInfoJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_changePicBtnActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        // TODO add your handling code here:
-        String id = idTextField.getText();
-        String name = nameTextField.getText();
-        String manager = managerTextField.getText();
-        String address = addressTextField.getText();
-        String contact = contactTextField.getText();
-        String license = licenseTextField.getText();
+       
+        String rid = idTextField.getText();
+        String rname = nameTextField.getText();
+        String rmanager = managerTextField.getText();
+        String radd = addressTextField.getText();
+        String rcontact = contactTextField.getText();
+        String rlicense = licenseTextField.getText();
 
-        if (id.isEmpty() || name.isEmpty() || manager.isEmpty() || address.isEmpty() || contact.isEmpty() || license.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Enter all fields!");
-        } else if(!phoneFormat(contact))
+        if (rid.isEmpty() || rname.isEmpty() || rmanager.isEmpty() || radd.isEmpty() || rcontact.isEmpty() || rlicense.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter all details correctly");
+        } else if(!phoneFormat(rcontact))
         {
-            JOptionPane.showMessageDialog(null, "Phone format incorrect!");
+            JOptionPane.showMessageDialog(null, "Please enter correct phone number");
         }else {
-            restaurant.setRestaurantManagerName(manager);
-            restaurant.setRestaurantAddress(address);
-            restaurant.setRestaurantPhoneNo(contact);
-            restaurant.setRestaurantName(name);
+            restaurant.setRestaurantManagerName(rmanager);
+            restaurant.setRestaurantAddress(radd);
+            restaurant.setRestaurantPhoneNo(rcontact);
+            restaurant.setRestaurantName(rname);
             restaurant.setRestaurantPhoto(img);
             
-            JOptionPane.showMessageDialog(null, "Changes saved sucessfully!");
+            JOptionPane.showMessageDialog(null, "Saved sucessfully!");
             
             idTextField.setEditable(false);
             nameTextField.setEditable(false);
@@ -290,8 +317,8 @@ public class ManageResturantInfoJPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         container.remove(this);
-        Component[] componentArray = container.getComponents();
-        Component component = componentArray[componentArray.length - 1];
+        Component[] components = container.getComponents();
+        Component component = components[components.length - 1];
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -322,6 +349,7 @@ public class ManageResturantInfoJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField licenseTextField;
     private javax.swing.JTextField managerTextField;
     private javax.swing.JTextField nameTextField;

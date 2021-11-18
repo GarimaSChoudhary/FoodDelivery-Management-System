@@ -185,7 +185,7 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
     }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+      
         CardLayout layout = (CardLayout) container.getLayout();
         CreateFoodItemJPanel createFoodItemJPanel = new CreateFoodItemJPanel(container,userAccount, system, restaurantDirectory,menuDirectory);
         container.add(createFoodItemJPanel);
@@ -193,7 +193,7 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        // TODO add your handling code here:
+        
         container.remove(this);
         Component[] componentArray = container.getComponents();
        Component component = componentArray[componentArray.length - 1];
@@ -202,15 +202,15 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        
         int selectedRow = menuJTable.getSelectedRow();
-        int count = menuJTable.getSelectedRowCount();
-        if(count == 1){
+        int selectedCount = menuJTable.getSelectedRowCount();
+        if(selectedCount == 1){
              if (selectedRow >= 0) {
             CardLayout layout = (CardLayout) container.getLayout();
-            String foodItemId = (String) menuJTable.getValueAt(selectedRow,0);
-            FoodDetails foodItem = menuDirectory.getFoodItem(foodItemId);
-            ViewFoodItemJPanel viewCustomersJPanel = new ViewFoodItemJPanel(container, foodItem, menuDirectory);
+            String foodId = (String) menuJTable.getValueAt(selectedRow,0);
+            FoodDetails food = menuDirectory.getFoodItem(foodId);
+            ViewFoodItemJPanel viewCustomersJPanel = new ViewFoodItemJPanel(container, food, menuDirectory);
             container.add(viewCustomersJPanel);
             layout.next(container);
         }
@@ -223,12 +223,12 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         int selectedRow = menuJTable.getSelectedRow();
-        int count = menuJTable.getSelectedRowCount();
-        if(count == 1){
+        int selectedCount = menuJTable.getSelectedRowCount();
+        if(selectedCount == 1){
             if (selectedRow >= 0) {
             int selectionButton = JOptionPane.YES_NO_OPTION;
-            int selectionResult = JOptionPane.showConfirmDialog(null, "Are you sure to delete?", "Warning", selectionButton);
-            if (selectionResult == JOptionPane.YES_OPTION) {
+            int result = JOptionPane.showConfirmDialog(null, "Confirm delete?", "Warning", selectionButton);
+            if (result == JOptionPane.YES_OPTION) {
                 String foodItemId = (String) menuJTable.getValueAt(selectedRow,0);
                 menuDirectory.deleteItem(foodItemId);
                 populate();
@@ -241,7 +241,6 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
         populate();
     }//GEN-LAST:event_jButton4ActionPerformed
 

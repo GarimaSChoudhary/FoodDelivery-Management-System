@@ -32,58 +32,56 @@ public class ManageRestaurantOrderJPanel extends javax.swing.JPanel {
      * Creates new form ManageRestaurantOrderJPanel
      */
     private JPanel userProcessContainer;
-    private UserAccount account;
+    private UserAccount userAccount;
     private EcoSystem business;
-    //private CustomerDirectory customerDirectory;
     private RestaurantDirectory restaurantDirectory;
     private DeliveryManDirectory deliveryManDirectory;
     private MenuDirectory menuDirectory;
     private OrdersDirectory orderDirectory;
     
-    public ManageRestaurantOrderJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem business, RestaurantDirectory restaurantDirectory, DeliveryManDirectory deliveryManDirectory, MenuDirectory menuDirectory, OrdersDirectory orderDirectory) {
+    public ManageRestaurantOrderJPanel(JPanel userProcessContainer, UserAccount userAccount, EcoSystem business, RestaurantDirectory restaurantDirectory, DeliveryManDirectory deliveryManDirectory, MenuDirectory menuDirectory, OrdersDirectory orderDirectory) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.account = account;
+        this.userAccount = userAccount;
         this.business = business;
-        //this.customerDirectory = customerDirectory;
         this.restaurantDirectory = restaurantDirectory;
         this.deliveryManDirectory = deliveryManDirectory;
         this.menuDirectory = menuDirectory;
         this.orderDirectory = orderDirectory;
         populate();
-        populateDeliveryManTable();
+        populateDMTable();
     }
     
     public void populate() {
         DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
         model.setRowCount(0);
-        for (Orders order : business.getOrderDirectory().getOrderDirectory()) {
-            if (order.getRestaurant().getRestaurantId().equalsIgnoreCase(account.getEmployee().getName())) {
+        for (Orders orders : business.getOrderDirectory().getOrderDirectory()) {
+            if (orders.getRestaurant().getRestaurantId().equalsIgnoreCase(userAccount.getEmployee().getName())) {
                 Object[] row = new Object[10];
-                row[0] = order.getMessage();
-                row[1] = order.getReceiver();
-                row[2] = order.getStatus();
-                row[3] = (order.getResult() == null ? "Waiting" : order.getResult());
-                row[4] = order.getRestaurant().getRestaurantName();
-                row[5] = order.getFoodItem().getFoodItemName();
-                row[6] = order.getQuantity();
-                row[7] = order.getQuantity() * order.getFoodItem().getFoodPrice();
-                row[8] = (order.getDeliveryMan() == null) ? "Awaiting Confirmation" : order.getDeliveryMan().getDeliveryName();
-                row[9] = order.getOrderId();
+                row[0] = orders.getMessage();
+                row[1] = orders.getReceiver();
+                row[2] = orders.getStatus();
+                row[3] = (orders.getResult() == null ? "Waiting" : orders.getResult());
+                row[4] = orders.getRestaurant().getRestaurantName();
+                row[5] = orders.getFoodItem().getFoodItemName();
+                row[6] = orders.getQuantity();
+                row[7] = orders.getQuantity() * orders.getFoodItem().getFoodPrice();
+                row[8] = (orders.getDeliveryMan() == null) ? "Awaiting Confirmation" : orders.getDeliveryMan().getDeliveryName();
+                row[9] = orders.getOrderId();
                 model.addRow(row);
             }
         }
     }
     
-    public void populateDeliveryManTable(){
+    public void populateDMTable(){
         DefaultTableModel model = (DefaultTableModel) deliveryTable.getModel();
         model.setRowCount(0);
-        for (DeliveryMan deliveryMan : deliveryManDirectory.getDeliveryManDirectory()) {
+        for (DeliveryMan delivery : deliveryManDirectory.getDeliveryManDirectory()) {
                 Object[] row = new Object[4];
-                row[0] = deliveryMan.getDeliveryName();
-                row[1] = deliveryMan.getDeliveryPhoneNo();
-                row[2] = deliveryMan.getDeliveryAddress();
-                row[3] = deliveryMan.getDeliveryId();
+                row[0] = delivery.getDeliveryName();
+                row[1] = delivery.getDeliveryPhoneNo();
+                row[2] = delivery.getDeliveryAddress();
+                row[3] = delivery.getDeliveryId();
                 model.addRow(row);
         }
     }
@@ -155,6 +153,7 @@ public class ManageRestaurantOrderJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(orderTable);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("Confirm Order");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,6 +161,7 @@ public class ManageRestaurantOrderJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton2.setText("Assign Delivery Man");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,6 +197,7 @@ public class ManageRestaurantOrderJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton4.setText("Refresh");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,6 +205,7 @@ public class ManageRestaurantOrderJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton5.setText("Refresh");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,23 +222,19 @@ public class ManageRestaurantOrderJPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 935, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton2))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton3)
-                                        .addGap(335, 335, 335)
-                                        .addComponent(jLabel9))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton4)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(jButton1)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addComponent(jButton3)
+                        .addGap(335, 335, 335)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 423, Short.MAX_VALUE)
+                        .addComponent(jButton4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -245,25 +243,27 @@ public class ManageRestaurantOrderJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton4))
-                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton5)
+                        .addGap(11, 11, 11)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton5))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addComponent(jButton2)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        
         int row = orderTable.getSelectedRow();
         int count = orderTable.getSelectedRowCount();
         if (count == 1) {
@@ -271,11 +271,11 @@ public class ManageRestaurantOrderJPanel extends javax.swing.JPanel {
                 String id = (String) orderTable.getValueAt(row, 9);
                 Orders order = business.getOrderDirectory().getOrderByOrderId(id);//orderDirectory.getOrderDirectory().get(row);
                 order.setStatus("Confirmed");
-                JOptionPane.showMessageDialog(null, "Order Confirmed!");
+                JOptionPane.showMessageDialog(null, "Your order is confirmed!");
                 populate();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Select one order!");
+            JOptionPane.showMessageDialog(null, "Select valid order from the table");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -287,19 +287,19 @@ public class ManageRestaurantOrderJPanel extends javax.swing.JPanel {
         int deliverCount = deliveryTable.getSelectedRowCount();
         if(orderCount ==1 && deliverCount == 1){
             if (row >= 0) {
-                String orderId = (String) orderTable.getValueAt(row,9);
-            Orders order = business.getOrderDirectory().getOrderByOrderId(orderId);
-            System.out.println(order.getStatus().trim());
-            if (order.getStatus().trim().equalsIgnoreCase("Confirmed")) {
+                String oid = (String) orderTable.getValueAt(row,9);
+            Orders orders = business.getOrderDirectory().getOrderByOrderId(oid);
+            
+            if (orders.getStatus().trim().equalsIgnoreCase("Order is confirmed")) {
                 if(deliverCount == 1){
                     if (deliveryRow >= 0) {
-                        System.out.println("In here"+ deliveryRow);
-                    order.setDeliveryMan(deliveryManDirectory.getDeliveryManDirectory().get(deliveryRow));
-                    String empId = (String) deliveryTable.getValueAt(deliveryRow,3);
-                    UserAccount user = business.getUserAccountDirectory().getUserByEmployeeId(empId);
-                    order.setReceiver(user);
-                    order.setStatus("Preparing Order");
-                    JOptionPane.showMessageDialog(null, "Delivery Man Assigned!");
+                      
+                    orders.setDeliveryMan(deliveryManDirectory.getDeliveryManDirectory().get(deliveryRow));
+                    String id = (String) deliveryTable.getValueAt(deliveryRow,3);
+                    UserAccount userAccount = business.getUserAccountDirectory().getUserByEmployeeId(id);
+                    orders.setReceiver(userAccount);
+                    orders.setStatus("Order is getting prepared");
+                    JOptionPane.showMessageDialog(null, "Your delivery man is confirmed");
                     populate();
                 }
                 }
@@ -313,27 +313,24 @@ public class ManageRestaurantOrderJPanel extends javax.swing.JPanel {
         
         }
         else{
-            JOptionPane.showMessageDialog(null, "Select one order and one deliveryman!");
+            JOptionPane.showMessageDialog(null, "Select atleast one order and atleast one delivery man!");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
         userProcessContainer.remove(this);
-        Component[] componentArray = userProcessContainer.getComponents();
-        Component component = componentArray[componentArray.length - 1];
+        Component[] components = userProcessContainer.getComponents();
+        Component component = components[components.length - 1];
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        populate();
+       populate();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        populateDeliveryManTable();
+        populateDMTable();
     }//GEN-LAST:event_jButton5ActionPerformed
 
 
