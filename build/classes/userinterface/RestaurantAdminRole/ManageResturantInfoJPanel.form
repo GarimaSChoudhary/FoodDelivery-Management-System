@@ -54,7 +54,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="changePicBtn" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jLabel9" min="-2" pref="181" max="-2" attributes="0"/>
+                                      <Component id="jLabel9" min="-2" pref="296" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -65,7 +65,7 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="110" pref="430" max="32767" attributes="0"/>
+              <EmptySpace min="110" pref="315" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

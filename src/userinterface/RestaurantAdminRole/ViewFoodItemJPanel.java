@@ -29,11 +29,10 @@ public class ViewFoodItemJPanel extends javax.swing.JPanel {
      */
     JFileChooser chooser;
     File file;
-    BufferedImage img;
+    BufferedImage image;
     private JPanel container;
     private FoodDetails foodItem;
     private MenuDirectory menuDirectory;
-    //private ;
     
     public ViewFoodItemJPanel(JPanel container,FoodDetails foodItem, MenuDirectory menuDirectory) {
         initComponents();
@@ -50,7 +49,7 @@ public class ViewFoodItemJPanel extends javax.swing.JPanel {
         itemPriceTextField.setEditable(false);
         itemIdTextField.setEditable(false);
         changeImgBtn.setVisible(false);
-        img = foodItem.getFoodPhoto();
+        image = foodItem.getFoodPhoto();
     }
 
     /**
@@ -75,6 +74,7 @@ public class ViewFoodItemJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(0, 153, 153));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("View/ Edit Food Item");
 
         itemPhoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -82,6 +82,7 @@ public class ViewFoodItemJPanel extends javax.swing.JPanel {
         itemPhoto.setMinimumSize(new java.awt.Dimension(120, 120));
         itemPhoto.setPreferredSize(new java.awt.Dimension(120, 120));
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Edit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +90,7 @@ public class ViewFoodItemJPanel extends javax.swing.JPanel {
             }
         });
 
+        saveBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         saveBtn.setText("Save Changes");
         saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,36 +120,36 @@ public class ViewFoodItemJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(58, 58, 58)
-                        .addComponent(jButton1)
-                        .addGap(80, 80, 80)
-                        .addComponent(saveBtn))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(itemPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(changeImgBtn)
+                            .addComponent(jButton1))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(saveBtn)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(itemIdTextField)
+                                .addComponent(itemNameTextField)
+                                .addComponent(itemDescriptionTextField)
+                                .addComponent(itemPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addGap(272, 272, 272))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(itemPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(changeImgBtn))
-                                .addGap(32, 32, 32)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(itemIdTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                                    .addComponent(itemNameTextField)
-                                    .addComponent(itemDescriptionTextField)
-                                    .addComponent(itemPriceTextField))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap()
+                        .addComponent(jButton2)
+                        .addGap(85, 85, 85)
                         .addComponent(jLabel1)))
-                .addContainerGap(493, Short.MAX_VALUE))
+                .addContainerGap(562, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton2)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(itemIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,36 +157,36 @@ public class ViewFoodItemJPanel extends javax.swing.JPanel {
                         .addComponent(itemNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(itemDescriptionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(itemPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(itemPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(itemPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(changeImgBtn))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(saveBtn))
-                .addContainerGap(380, Short.MAX_VALUE))
+                .addContainerGap(363, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
-        String id = itemIdTextField.getText();
-        String name = itemNameTextField.getText();
-        String description = itemDescriptionTextField.getText();
-        Double price = 0.0;
+        String foodId = itemIdTextField.getText();
+        String fname = itemNameTextField.getText();
+        String fdescription = itemDescriptionTextField.getText();
+        Double foodPrice = 0.0;
         try{
-            price  = Double.parseDouble(itemPriceTextField.getText());
+            foodPrice  = Double.parseDouble(itemPriceTextField.getText());
         } catch(NumberFormatException exception){
-            JOptionPane.showMessageDialog(null, "Enter valid price!");
+            JOptionPane.showMessageDialog(null, "Please enter valid price");
         }
        
-        if(id.isEmpty() || name.isEmpty() || description.isEmpty() || price == 0.0 || img == null){
-            JOptionPane.showMessageDialog(null, "Enter all fields!");
+        if(foodId.isEmpty() || fname.isEmpty() || fdescription.isEmpty() || foodPrice == 0.0 || image == null){
+            JOptionPane.showMessageDialog(null, "Please enter all details correctly");
         }
         else{
-            menuDirectory.updateFoodItem(foodItem.getFoodItemId(),name,description,price,img);
+            menuDirectory.updateFoodItem(foodItem.getFoodItemId(),fname,fdescription,foodPrice,image);
             itemNameTextField.setEditable(false);
             itemDescriptionTextField.setEditable(false);
             itemPriceTextField.setEditable(false);
@@ -209,17 +211,17 @@ public class ViewFoodItemJPanel extends javax.swing.JPanel {
         chooser.showOpenDialog(null);
         file = chooser.getSelectedFile();
         try{
-            img = ImageIO.read(file);
+            image = ImageIO.read(file);
         } catch (IOException e){
-            img = foodItem.getFoodPhoto();
+            image = foodItem.getFoodPhoto();
         }
     }//GEN-LAST:event_changeImgBtnActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         container.remove(this);
-        Component[] componentArray = container.getComponents();
-        Component component = componentArray[componentArray.length - 1];
+        Component[] components = container.getComponents();
+        Component component = components[components.length - 1];
         ManageMenuJPanel manageMenuJPanel = (ManageMenuJPanel) component;
         manageMenuJPanel.populate();
         CardLayout layout = (CardLayout) container.getLayout();
