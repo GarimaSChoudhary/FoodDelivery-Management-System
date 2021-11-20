@@ -253,7 +253,7 @@ public class ViewRestaurantsJPanel extends javax.swing.JPanel {
         Component[] componentArray = container.getComponents();
         Component component = componentArray[componentArray.length - 1];
         ManageRestaurantJPanel manageRestaurantJPanel = (ManageRestaurantJPanel) component;
-        manageRestaurantJPanel.populate();
+        manageRestaurantJPanel.populateTable();
 
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);

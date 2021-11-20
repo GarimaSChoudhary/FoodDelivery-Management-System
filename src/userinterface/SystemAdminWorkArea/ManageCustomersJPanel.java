@@ -21,35 +21,31 @@ import javax.swing.table.DefaultTableModel;
  * @author garima
  */
 public class ManageCustomersJPanel extends javax.swing.JPanel {
-
-    /**
-     * Creates new form ManageCustomersJPanel
-     */
     public CustomerDirectory customerDirectory;
-    public JPanel container;
-    public EcoSystem system;
+    public JPanel panelContainer;
+    public EcoSystem ecoSystem;
 
-    public ManageCustomersJPanel(JPanel userProcessContainer, EcoSystem system, CustomerDirectory customerDirectory) {
+    public ManageCustomersJPanel(JPanel userProcessContainer, EcoSystem ecoSystem, CustomerDirectory customerDirectory) {
         initComponents();
         this.customerDirectory = customerDirectory;
-        this.container = userProcessContainer;
-        this.system = system;
-        populate();
+        this.panelContainer = userProcessContainer;
+        this.ecoSystem = ecoSystem;
+        populateTable();
     }
 
-    public void populate() {
+    public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) customerJTable.getModel();
 
         model.setRowCount(0);
-        for (UserAccount ua : system.getUserAccountDirectory().getUserAccountDirectory()) {
-            for (Customer customer : customerDirectory.getCustomerDirectory()) {
-                if (customer.getCustomerId().equalsIgnoreCase(ua.getEmployee().getName())) {
+        for (UserAccount useraccount : ecoSystem.getUserAccountDirectory().getUserAccountDirectory()) {
+            for (Customer c : customerDirectory.getCustomerDirectory()) {
+                if (c.getCustomerId().equalsIgnoreCase(useraccount.getEmployee().getName())) {
                     Object[] row = new Object[5];
-                    row[0] = customer.getCustomerId();
-                    row[1] = customer.getCustomerName();
-                    row[2] = customer.getCustomerPhoneNo();
-                    row[3] = customer.getCustomerAddress();
-                    row[4] = ua.getUsername();
+                    row[0] = c.getCustomerId();
+                    row[1] = c.getCustomerName();
+                    row[2] = c.getCustomerPhoneNo();
+                    row[3] = c.getCustomerAddress();
+                    row[4] = useraccount.getUsername();
                     model.addRow(row);
                 }
             }
@@ -173,55 +169,52 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
     private void viewCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewCustomerActionPerformed
         // TODO add your handling code here:
         int selectedRow = customerJTable.getSelectedRow();
-        int count = customerJTable.getSelectedRowCount();
-        if(count == 1){
+        int selectedcount = customerJTable.getSelectedRowCount();
+        if(selectedcount == 1){
             if (selectedRow >= 0) {
-            CardLayout layout = (CardLayout) container.getLayout();
-            Customer customer = customerDirectory.getCustomerId(selectedRow);
-            ViewCustomersJPanel viewCustomersJPanel = new ViewCustomersJPanel(container, customer, customerDirectory);
-            container.add(viewCustomersJPanel);
-            layout.next(container);
+            CardLayout layout = (CardLayout) panelContainer.getLayout();
+            Customer c = customerDirectory.getCustomerId(selectedRow);
+            ViewCustomersJPanel view = new ViewCustomersJPanel(panelContainer, c, customerDirectory);
+            panelContainer.add(view);
+            layout.next(panelContainer);
         }
         }
          else {
-            JOptionPane.showMessageDialog(null, "Please select a Row!!");
+            JOptionPane.showMessageDialog(null, "Please select valid row from the table");
         }
     }//GEN-LAST:event_viewCustomerActionPerformed
 
     private void deleteCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCustomerActionPerformed
-        // TODO add your handling code here:
         int selectedRow = customerJTable.getSelectedRow();
         int count = customerJTable.getSelectedRowCount();
         if(count == 1){
             if (selectedRow >= 0) {
             int selectionButton = JOptionPane.YES_NO_OPTION;
-            int selectionResult = JOptionPane.showConfirmDialog(null, "Are you sure to delete??", "Warning", selectionButton);
+            int selectionResult = JOptionPane.showConfirmDialog(null, "Please confirm to delete", "Warning", selectionButton);
             if (selectionResult == JOptionPane.YES_OPTION) {
-                customerDirectory.deleteCustomer(selectedRow,system);
-                populate();
+                customerDirectory.deleteCustomer(selectedRow,ecoSystem);
+                populateTable();
             }
         }
         }
         else {
-            JOptionPane.showMessageDialog(null, "Please select a Row!!");
+            JOptionPane.showMessageDialog(null, "Please select valid row from the table");
         }
     }//GEN-LAST:event_deleteCustomerActionPerformed
 
     private void addCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerBtnActionPerformed
-        // TODO add your handling code here:
-        CardLayout layout = (CardLayout) container.getLayout();
-        CreateCustomersJPanel createCustomersJPanel = new CreateCustomersJPanel(container, system, customerDirectory);
-        container.add(createCustomersJPanel);
-        layout.next(container);
+        CardLayout layout = (CardLayout) panelContainer.getLayout();
+        CreateCustomersJPanel createCust = new CreateCustomersJPanel(panelContainer, ecoSystem, customerDirectory);
+        panelContainer.add(createCust);
+        layout.next(panelContainer);
     }//GEN-LAST:event_addCustomerBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        // TODO add your handling code here:
-        container.remove(this);
-        Component[] componentArray = container.getComponents();
-        Component component = componentArray[componentArray.length - 1];
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.previous(container);
+        panelContainer.remove(this);
+        Component[] components = panelContainer.getComponents();
+        Component component = components[components.length - 1];
+        CardLayout layout = (CardLayout) panelContainer.getLayout();
+        layout.previous(panelContainer);
     }//GEN-LAST:event_backBtnActionPerformed
 
 

@@ -24,18 +24,14 @@ import javax.swing.JPanel;
  * @author garima
  */
 public class CreateCustomersJPanel extends javax.swing.JPanel {
-
-    /**
-     * Creates new form CreateCustomersJPanel
-     */
     public CustomerDirectory customerDirectory;
-    public JPanel container;
-    public EcoSystem system;
-    public CreateCustomersJPanel(JPanel container,EcoSystem system, CustomerDirectory customerDirectory) {
+    public JPanel panelContainer;
+    public EcoSystem ecoSystem;
+    public CreateCustomersJPanel(JPanel panelContainer,EcoSystem ecoSystem, CustomerDirectory customerDirectory) {
         initComponents();
         this.customerDirectory = customerDirectory;
-        this.container = container;
-        this.system = system;
+        this.panelContainer = panelContainer;
+        this.ecoSystem = ecoSystem;
     }
 
     /**
@@ -171,31 +167,31 @@ public class CreateCustomersJPanel extends javax.swing.JPanel {
 
     private void addCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerBtnActionPerformed
         // TODO add your handling code here:
-        String name = customerNameTextField.getText();
-        String phone = customerContactNoTextField.getText();
-        String address = customerAddressTextField.getText();
-        String username = usernameTextField.getText();
-        String password = passwordTextField.getText();
+        String customerName = customerNameTextField.getText();
+        String customerPhone = customerContactNoTextField.getText();
+        String customerAddress = customerAddressTextField.getText();
+        String customerUsername = usernameTextField.getText();
+        String customerPassword = passwordTextField.getText();
         
-        if(name.isEmpty() || phone.isEmpty() || address.isEmpty()|| username.isEmpty() || password.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Please enter all fields!");
+        if(customerName.isEmpty() || customerPhone.isEmpty() || customerAddress.isEmpty()|| customerUsername.isEmpty() || customerPassword.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please enter correct details");
         }
-        else if(!phoneFormat(phone))
+        else if(!phoneFormat(customerPhone))
         {
-            JOptionPane.showMessageDialog(null, "Phone format incorrect!");
+            JOptionPane.showMessageDialog(null, "Please enter the correct phone number");
         }
-        else if(!customerDirectory.isPhoneUnique(phone)){
-            JOptionPane.showMessageDialog(null, "Phone No already registered!");
+        else if(!customerDirectory.isPhoneUnique(customerPhone)){
+            JOptionPane.showMessageDialog(null, "This phone number is already registered");
         }
-        else if(!system.getUserAccountDirectory().checkIfUsernameIsUnique(username)){
-            JOptionPane.showMessageDialog(null, "Username already exists!");
+        else if(!ecoSystem.getUserAccountDirectory().checkIfUsernameIsUnique(customerUsername)){
+            JOptionPane.showMessageDialog(null, "This username is already present");
         }
         else{
-            Customer customer = customerDirectory.addCustomer(name,phone,address);
-            Employee employee = system.getEmployeeDirectory().createEmployee(customer.getCustomerId());
+            Customer customer = customerDirectory.addCustomer(customerName,customerPhone,customerAddress);
+            Employee employee = ecoSystem.getEmployeeDirectory().createEmployee(customer.getCustomerId());
             
-            UserAccount account = system.getUserAccountDirectory().createUserAccount(username, password, employee, new CustomerRole());
-            JOptionPane.showMessageDialog(null, "Customer added!");
+            UserAccount account = ecoSystem.getUserAccountDirectory().createUserAccount(customerUsername, customerPassword, employee, new CustomerRole());
+            JOptionPane.showMessageDialog(null, "New customer added");
             customerNameTextField.setText("");
             customerContactNoTextField.setText("");
             customerAddressTextField.setText("");
@@ -206,14 +202,15 @@ public class CreateCustomersJPanel extends javax.swing.JPanel {
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
-        container.remove(this);
-         Component[] componentArray = container.getComponents();
-        Component component = componentArray[componentArray.length - 1];
+        panelContainer.remove(this);
+        
+        Component[] components = panelContainer.getComponents();
+        Component component = components[components.length - 1];
         ManageCustomersJPanel manageCustomersJPanel = (ManageCustomersJPanel) component;
-        manageCustomersJPanel.populate();
+        manageCustomersJPanel.populateTable();
 
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.previous(container);
+        CardLayout layout = (CardLayout) panelContainer.getLayout();
+        layout.previous(panelContainer);
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void usernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTextFieldActionPerformed
@@ -221,8 +218,8 @@ public class CreateCustomersJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_usernameTextFieldActionPerformed
 
     public boolean phoneFormat(String phone){
-        String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
-        Pattern pattern = Pattern.compile(regex);
+        String phoneReg = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+        Pattern pattern = Pattern.compile(phoneReg);
         
         Matcher matcher = pattern.matcher(phone);
         if(matcher.matches()){

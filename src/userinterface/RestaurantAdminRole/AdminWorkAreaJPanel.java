@@ -19,7 +19,6 @@ import userinterface.SystemAdminWorkArea.CreateCustomersJPanel;
  * @author garima
  */
 public class AdminWorkAreaJPanel extends javax.swing.JPanel {
-    
     private JPanel userProcessContainer;
     private RestaurantDirectory restaurantDirectory;
     private EcoSystem system;

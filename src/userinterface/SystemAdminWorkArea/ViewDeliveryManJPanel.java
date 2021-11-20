@@ -21,16 +21,12 @@ import javax.swing.JPanel;
  * @author garima
  */
 public class ViewDeliveryManJPanel extends javax.swing.JPanel {
-
-    /**
-     * Creates new form ViewDeliveryManJPanel
-     */
-    public JPanel container;
+    public JPanel panelContaineer;
     public DeliveryMan deliveryMan;
     public DeliveryManDirectory deliveryManDirectory;
     public ViewDeliveryManJPanel(JPanel container,DeliveryMan deliveryMan,DeliveryManDirectory deliveryManDirectory) {
         initComponents();
-        this.container = container;
+        this.panelContaineer = container;
         this.deliveryMan = deliveryMan;
         this.deliveryManDirectory = deliveryManDirectory;
         
@@ -182,15 +178,14 @@ public class ViewDeliveryManJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-        // TODO add your handling code here:
         deliveryManNameTextField.setEditable(true);
         deliveryManPhoneTextField.setEditable(true);
         deliveryManAddressTextField.setEditable(true);
     }//GEN-LAST:event_editBtnActionPerformed
 
-    public boolean phoneFormat(String phone){
-        String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
-        Pattern pattern = Pattern.compile(regex);
+    public boolean phoneReg(String phone){
+        String phoneReg = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+        Pattern pattern = Pattern.compile(phoneReg);
         
         Matcher matcher = pattern.matcher(phone);
         if(matcher.matches()){
@@ -201,21 +196,21 @@ public class ViewDeliveryManJPanel extends javax.swing.JPanel {
     
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
-        String id = deliveryManIdTextField.getText();
-        String name = deliveryManNameTextField.getText();
-        String phone = deliveryManPhoneTextField.getText();
-        String address = deliveryManAddressTextField.getText();
+        String dmid = deliveryManIdTextField.getText();
+        String dmName = deliveryManNameTextField.getText();
+        String dmPhone = deliveryManPhoneTextField.getText();
+        String dmAddress = deliveryManAddressTextField.getText();
         
-        if(name.isEmpty() || phone.isEmpty() || address.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Please enter all fields!");
+        if(dmName.isEmpty() || dmPhone.isEmpty() || dmAddress.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please enter all the details correctly");
         }
-        else if(!phoneFormat(phone))
+        else if(!phoneReg(dmPhone))
         {
             JOptionPane.showMessageDialog(null, "Phone format incorrect!");
         }
         else{
-            deliveryManDirectory.updateDeliveryMan(id,name,phone,address);
-            JOptionPane.showMessageDialog(null, "Delivery man details updated!");
+            deliveryManDirectory.updateDeliveryMan(dmid,dmName,dmPhone,dmAddress);
+            JOptionPane.showMessageDialog(null, "Delivery man details updated");
             deliveryManNameTextField.setEditable(false);
             deliveryManPhoneTextField.setEditable(false);
             deliveryManAddressTextField.setEditable(false);
@@ -224,14 +219,14 @@ public class ViewDeliveryManJPanel extends javax.swing.JPanel {
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
-        container.remove(this);
-        Component[] componentArray = container.getComponents();
-        Component component = componentArray[componentArray.length - 1];
+        panelContaineer.remove(this);
+        Component[] components = panelContaineer.getComponents();
+        Component component = components[components.length - 1];
         ManageDeliveryJPanel manageDeliveryJPanel = (ManageDeliveryJPanel) component;
         manageDeliveryJPanel.populate();
 
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.previous(container);
+        CardLayout layout = (CardLayout) panelContaineer.getLayout();
+        layout.previous(panelContaineer);
     }//GEN-LAST:event_backBtnActionPerformed
 
 

@@ -29,20 +29,16 @@ import javax.swing.JPanel;
  * @author garima
  */
 public class CreateDeliveryManJPanel extends javax.swing.JPanel {
-
-    /**
-     * Creates new form CreateDeliveryManJPanel
-     */
     JFileChooser chooser;
     File file;
-    BufferedImage img;
+    BufferedImage image;
     private DeliveryManDirectory deliveryManDirectory;
-    private EcoSystem system;
+    private EcoSystem ecoSystem;
     private JPanel container;
     public CreateDeliveryManJPanel(JPanel container, EcoSystem system, DeliveryManDirectory deliveryManDirectory) {
         initComponents();
         this.deliveryManDirectory = deliveryManDirectory;
-        this.system = system;
+        this.ecoSystem = system;
         this.container = container;
     }
 
@@ -182,47 +178,46 @@ public class CreateDeliveryManJPanel extends javax.swing.JPanel {
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
-        String name = nameTextField.getText();
-        String phone = contactNoTextField.getText();
-        String address = addressTextField.getText();
-        String username = usernameTextField.getText();
-        String password = passwordTextField.getText();
+        String deliveryName = nameTextField.getText();
+        String deliveryPhone = contactNoTextField.getText();
+        String deliveryAddress = addressTextField.getText();
+        String deliveryUsername = usernameTextField.getText();
+        String deliveryPassword = passwordTextField.getText();
         
-        if(name.isEmpty() || phone.isEmpty() || address.isEmpty()|| username.isEmpty() || password.isEmpty() || img == null){
-            JOptionPane.showMessageDialog(null, "Please enter all fields!");
+        if(deliveryName.isEmpty() || deliveryPhone.isEmpty() || deliveryAddress.isEmpty()|| deliveryUsername.isEmpty() || deliveryPassword.isEmpty() || image == null){
+            JOptionPane.showMessageDialog(null, "Please enter correct details");
         }
-        else if(!phoneFormat(phone))
+        else if(!phoneFormat(deliveryPhone))
         {
-            JOptionPane.showMessageDialog(null, "Phone format incorrect!");
+            JOptionPane.showMessageDialog(null, "Please enter correct phone number details");
         }
-        else if(!deliveryManDirectory.isPhoneUnique(phone)){
-            JOptionPane.showMessageDialog(null, "Phone No already registered, try loging in!");
+        else if(!deliveryManDirectory.isPhoneUnique(deliveryPhone)){
+            JOptionPane.showMessageDialog(null, "This phone number is alreadt registered");
         }
-        else if(!system.getUserAccountDirectory().checkIfUsernameIsUnique(username)){
-            JOptionPane.showMessageDialog(null, "Username already exists!");
+        else if(!ecoSystem.getUserAccountDirectory().checkIfUsernameIsUnique(deliveryUsername)){
+            JOptionPane.showMessageDialog(null, "Username already exists");
         }
         else{
-            DeliveryMan deliveryMan = deliveryManDirectory.addDeliveryMan(name,phone,address,img);
-            Employee employee = system.getEmployeeDirectory().createEmployee(deliveryMan.getDeliveryId());
+            DeliveryMan dm = deliveryManDirectory.addDeliveryMan(deliveryName,deliveryPhone,deliveryAddress,image);
+            Employee emp = ecoSystem.getEmployeeDirectory().createEmployee(dm.getDeliveryId());
             
-            UserAccount account = system.getUserAccountDirectory().createUserAccount(username, password, employee, new DeliverManRole());
-            JOptionPane.showMessageDialog(null, "Delivery Man added!");
+            UserAccount userAccount = ecoSystem.getUserAccountDirectory().createUserAccount(deliveryUsername, deliveryPassword, emp, new DeliverManRole());
+            JOptionPane.showMessageDialog(null, "New Delivery Man added!");
             nameTextField.setText("");
             contactNoTextField.setText("");
             addressTextField.setText("");
             usernameTextField.setText("");
             passwordTextField.setText("");
-            img = null;
+            image = null;
         }
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         file = chooser.getSelectedFile();
         try{
-            img = ImageIO.read(file);
+            image = ImageIO.read(file);
         } catch (IOException e){
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -230,8 +225,8 @@ public class CreateDeliveryManJPanel extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         container.remove(this);
-         Component[] componentArray = container.getComponents();
-        Component component = componentArray[componentArray.length - 1];
+         Component[] components = container.getComponents();
+        Component component = components[components.length - 1];
         ManageDeliveryJPanel manageDeliveryJPanel = (ManageDeliveryJPanel) component;
         manageDeliveryJPanel.populate();
 
@@ -240,8 +235,8 @@ public class CreateDeliveryManJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public boolean phoneFormat(String phone){
-        String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
-        Pattern pattern = Pattern.compile(regex);
+        String phoneReg = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+        Pattern pattern = Pattern.compile(phoneReg);
         
         Matcher matcher = pattern.matcher(phone);
         if(matcher.matches()){

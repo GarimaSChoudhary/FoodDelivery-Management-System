@@ -23,20 +23,16 @@ import javax.swing.table.DefaultTableModel;
  * @author garima
  */
 public class ManageDeliveryJPanel extends javax.swing.JPanel {
-
-    /**
-     * Creates new form ManageDeliveryDirectory
-     */
-    JPanel container;
-    EcoSystem system;
+    JPanel panelContainer;
+    EcoSystem ecoSystem;
     CustomerDirectory customerDirectory;
     RestaurantDirectory restaurantDirectory;
     DeliveryManDirectory deliveryManDirectory;
 
-    public ManageDeliveryJPanel(JPanel userProcessContainer, EcoSystem system, DeliveryManDirectory deliveryManDirectory) {
+    public ManageDeliveryJPanel(JPanel userProcessContainer, EcoSystem ecosystem, DeliveryManDirectory deliveryManDirectory) {
         initComponents();
-        this.container = userProcessContainer;
-        this.system = system;
+        this.panelContainer = userProcessContainer;
+        this.ecoSystem = ecosystem;
         this.deliveryManDirectory = deliveryManDirectory;
         populate();
     }
@@ -45,15 +41,15 @@ public class ManageDeliveryJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) deliveryJTable.getModel();
         
         model.setRowCount(0);
-        for (UserAccount ua : system.getUserAccountDirectory().getUserAccountDirectory()) {
-            for (DeliveryMan deliveryMan : deliveryManDirectory.getDeliveryManDirectory()) {
-                if (deliveryMan.getDeliveryId().equalsIgnoreCase(ua.getEmployee().getName())) {
+        for (UserAccount userAccount : ecoSystem.getUserAccountDirectory().getUserAccountDirectory()) {
+            for (DeliveryMan dm : deliveryManDirectory.getDeliveryManDirectory()) {
+                if (dm.getDeliveryId().equalsIgnoreCase(userAccount.getEmployee().getName())) {
                     Object[] row = new Object[5];
-                    row[0] = deliveryMan.getDeliveryId();
-                    row[1] = deliveryMan.getDeliveryName();
-                    row[2] = deliveryMan.getDeliveryPhoneNo();
-                    row[3] = deliveryMan.getDeliveryAddress();
-                    row[4] = ua.getUsername();
+                    row[0] = dm.getDeliveryId();
+                    row[1] = dm.getDeliveryName();
+                    row[2] = dm.getDeliveryPhoneNo();
+                    row[3] = dm.getDeliveryAddress();
+                    row[4] = userAccount.getUsername();
                     model.addRow(row);
                 }
             }
@@ -174,19 +170,19 @@ public class ManageDeliveryJPanel extends javax.swing.JPanel {
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
-        CardLayout layout = (CardLayout) container.getLayout();
-        CreateDeliveryManJPanel createDeliveryManJPanel = new CreateDeliveryManJPanel(container, system, deliveryManDirectory);
-        container.add(createDeliveryManJPanel);
-        layout.next(container);
+        CardLayout layout = (CardLayout) panelContainer.getLayout();
+        CreateDeliveryManJPanel create = new CreateDeliveryManJPanel(panelContainer, ecoSystem, deliveryManDirectory);
+        panelContainer.add(create);
+        layout.next(panelContainer);
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
-        container.remove(this);
-        Component[] componentArray = container.getComponents();
-        Component component = componentArray[componentArray.length - 1];
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.previous(container);
+        panelContainer.remove(this);
+        Component[] components = panelContainer.getComponents();
+        Component component = components[components.length - 1];
+        CardLayout layout = (CardLayout) panelContainer.getLayout();
+        layout.previous(panelContainer);
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
@@ -196,14 +192,14 @@ public class ManageDeliveryJPanel extends javax.swing.JPanel {
         if(count == 1){
             if (selectedRow >= 0) {
             int selectionButton = JOptionPane.YES_NO_OPTION;
-            int selectionResult = JOptionPane.showConfirmDialog(null, "Are you sure to delete??", "Warning", selectionButton);
+            int selectionResult = JOptionPane.showConfirmDialog(null, "Please confirm to delete", "Warning", selectionButton);
             if (selectionResult == JOptionPane.YES_OPTION) {
-                deliveryManDirectory.deleteDeliveryMan(selectedRow,system);
+                deliveryManDirectory.deleteDeliveryMan(selectedRow,ecoSystem);
                 populate();
             }
         }
         } else {
-            JOptionPane.showMessageDialog(null, "Please select a Row!!");
+            JOptionPane.showMessageDialog(null, "Please select valid row from the table");
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
@@ -213,15 +209,15 @@ public class ManageDeliveryJPanel extends javax.swing.JPanel {
         int count = deliveryJTable.getSelectedRowCount();
         if(count == 1){
             if (selectedRow >= 0) {
-            CardLayout layout = (CardLayout) container.getLayout();
+            CardLayout layout = (CardLayout) panelContainer.getLayout();
             DeliveryMan deliveryMan = deliveryManDirectory.getDeliveryManId(selectedRow);
-            ViewDeliveryManJPanel viewDeliveryManJPanel = new ViewDeliveryManJPanel(container, deliveryMan, deliveryManDirectory);
-            container.add(viewDeliveryManJPanel);
-            layout.next(container);
+            ViewDeliveryManJPanel viewDeliveryManJPanel = new ViewDeliveryManJPanel(panelContainer, deliveryMan, deliveryManDirectory);
+            panelContainer.add(viewDeliveryManJPanel);
+            layout.next(panelContainer);
         }
         }
          else {
-            JOptionPane.showMessageDialog(null, "Please select a Row!!");
+            JOptionPane.showMessageDialog(null, "Please select valid row from the table");
         }
     }//GEN-LAST:event_viewBtnActionPerformed
 

@@ -210,7 +210,7 @@ public class ViewCustomersJPanel extends javax.swing.JPanel {
          Component[] componentArray = container.getComponents();
         Component component = componentArray[componentArray.length - 1];
         ManageCustomersJPanel manageCustomersJPanel = (ManageCustomersJPanel) component;
-        manageCustomersJPanel.populate();
+        manageCustomersJPanel.populateTable();
 
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);

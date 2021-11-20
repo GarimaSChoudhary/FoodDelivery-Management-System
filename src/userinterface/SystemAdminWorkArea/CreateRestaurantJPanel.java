@@ -28,21 +28,17 @@ import javax.swing.JPanel;
  * @author garima
  */
 public class CreateRestaurantJPanel extends javax.swing.JPanel {
-
-    /**
-     * Creates new form createRestaurantJPanel
-     */
     JFileChooser chooser;
     File file;
-    BufferedImage img;
+    BufferedImage image;
     private RestaurantDirectory restaurantDirectory;
-    private JPanel container;
-    private EcoSystem system;
-    public CreateRestaurantJPanel(JPanel container, EcoSystem system,RestaurantDirectory restaurantDirectory) {
+    private JPanel panelContainer;
+    private EcoSystem ecosystem;
+    public CreateRestaurantJPanel(JPanel panelContainer, EcoSystem ecoSystem, RestaurantDirectory restaurantDirectory) {
         initComponents();
         this.restaurantDirectory = restaurantDirectory;
-        this.container = container;
-        this.system = system;
+        this.panelContainer = panelContainer;
+        this.ecosystem = ecoSystem;
     }
 
     /**
@@ -205,34 +201,34 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
 
     private void addRestaurantBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRestaurantBtnActionPerformed
         // TODO add your handling code here:
-        String name = restaurantNameTextField.getText();
-        String address = restaurantAddressTextField.getText();
-        String phone = restaurantPhoneNoTextField.getText();
-        String username = usernameTextField.getText();
-        String password = passwordTextField.getText();
-        String managerName = managerNameTextField.getText();
-        String licenseNo = licenseNoTextField.getText();
+        String restName = restaurantNameTextField.getText();
+        String raddress = restaurantAddressTextField.getText();
+        String rPhone = restaurantPhoneNoTextField.getText();
+        String rusername = usernameTextField.getText();
+        String rpassword = passwordTextField.getText();
+        String restManagerName = managerNameTextField.getText();
+        String restLicenseNo = licenseNoTextField.getText();
         
-        if(username.isEmpty() || password.isEmpty() || name.isEmpty() || address.isEmpty() || phone.isEmpty() || managerName.isEmpty() || licenseNo.isEmpty() || img == null){
-            JOptionPane.showMessageDialog(null, "Please enter all fields!");
+        if(rusername.isEmpty() || rpassword.isEmpty() || restName.isEmpty() || raddress.isEmpty() || rPhone.isEmpty() || restManagerName.isEmpty() || restLicenseNo.isEmpty() || image == null){
+            JOptionPane.showMessageDialog(null, "Please enter correct details");
         } 
-        else if(!phoneFormat(phone))
+        else if(!phoneFormat(rPhone))
         {
-            JOptionPane.showMessageDialog(null, "Phone format incorrect!");
+            JOptionPane.showMessageDialog(null, "Please enter correct phone number details");
         }
-        else if(!system.getUserAccountDirectory().checkIfUsernameIsUnique(username)){
-            JOptionPane.showMessageDialog(null, "Username already exists!");
+        else if(!ecosystem.getUserAccountDirectory().checkIfUsernameIsUnique(rusername)){
+            JOptionPane.showMessageDialog(null, "Username already exists");
         }
-        else if(!restaurantDirectory.isPhoneUnique(phone)){
-            JOptionPane.showMessageDialog(null, "Phone No already registered!");
+        else if(!restaurantDirectory.isPhoneUnique(rPhone)){
+            JOptionPane.showMessageDialog(null, "This phone number is already registered");
         }
-        else if(!restaurantDirectory.isUniqueLicenseNo(licenseNo)){
+        else if(!restaurantDirectory.isUniqueLicenseNo(restLicenseNo)){
             JOptionPane.showMessageDialog(null, "License No already exists!");
         }
         else{
-            Restaurant restaurant = restaurantDirectory.addRestaurant(managerName,name,phone,address,img, licenseNo);
-            Employee employee = system.getEmployeeDirectory().createEmployee(restaurant.getRestaurantId());
-            UserAccount account = system.getUserAccountDirectory().createUserAccount(username, password, employee, new AdminRole());
+            Restaurant restaurant = restaurantDirectory.addRestaurant(restManagerName,restName,rPhone,raddress,image, restLicenseNo);
+            Employee employee = ecosystem.getEmployeeDirectory().createEmployee(restaurant.getRestaurantId());
+            UserAccount account = ecosystem.getUserAccountDirectory().createUserAccount(rusername, rpassword, employee, new AdminRole());
             JOptionPane.showMessageDialog(null, "Restaurant added!");
             restaurantNameTextField.setText("");
             restaurantAddressTextField.setText("");
@@ -241,7 +237,7 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
             passwordTextField.setText("");
             licenseNoTextField.setText("");
             managerNameTextField.setText("");
-            img = null;
+            image = null;
         }
     }//GEN-LAST:event_addRestaurantBtnActionPerformed
     
@@ -251,26 +247,26 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
         chooser.showOpenDialog(null);
         file = chooser.getSelectedFile();
         try{
-            img = ImageIO.read(file);
+            image = ImageIO.read(file);
         } catch (IOException e){
         }
     }//GEN-LAST:event_chooseImgBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
-        container.remove(this);
-         Component[] componentArray = container.getComponents();
-        Component component = componentArray[componentArray.length - 1];
+        panelContainer.remove(this);
+         Component[] components = panelContainer.getComponents();
+        Component component = components[components.length - 1];
         ManageRestaurantJPanel manageRestaurantJPanel = (ManageRestaurantJPanel) component;
-        manageRestaurantJPanel.populate();
+        manageRestaurantJPanel.populateTable();
 
-        CardLayout layout = (CardLayout) container.getLayout();
-        layout.previous(container);
+        CardLayout layout = (CardLayout) panelContainer.getLayout();
+        layout.previous(panelContainer);
     }//GEN-LAST:event_backBtnActionPerformed
     
     public boolean phoneFormat(String phone){
-        String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
-        Pattern pattern = Pattern.compile(regex);
+        String phoneRegex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+        Pattern pattern = Pattern.compile(phoneRegex);
         
         Matcher matcher = pattern.matcher(phone);
         if(matcher.matches()){

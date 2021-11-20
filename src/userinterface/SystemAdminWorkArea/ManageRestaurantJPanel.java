@@ -23,10 +23,6 @@ import javax.swing.table.DefaultTableModel;
  * @author garima
  */
 public class ManageRestaurantJPanel extends javax.swing.JPanel {
-
-    /**
-     * Creates new form ManageRestaurantJPanel
-     */
     public RestaurantDirectory restaurantDirectory;
     public JPanel container;
     public EcoSystem system;
@@ -37,9 +33,7 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
         this.container = container;
         this.restaurantDirectory = restaurantDirectory;
         this.system = system;
-        //this.employeeDirectory = employeeDirectory;
-
-        populate();
+        populateTable();
     }
 
     /**
@@ -156,54 +150,44 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void populate() {
+    public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) restaurantJTable.getModel();
 
         model.setRowCount(0);
-        for (UserAccount ua : system.getUserAccountDirectory().getUserAccountDirectory()) {
-            for (Restaurant restaurant : restaurantDirectory.getRestaurantDirectory()) {
-                if (restaurant.getRestaurantId().equalsIgnoreCase(ua.getEmployee().getName())) {
+        for (UserAccount userAccount : system.getUserAccountDirectory().getUserAccountDirectory()) {
+            for (Restaurant r : restaurantDirectory.getRestaurantDirectory()) {
+                if (r.getRestaurantId().equalsIgnoreCase(userAccount.getEmployee().getName())) {
                     Object[] row = new Object[7];
-                    row[0] = restaurant.getRestaurantId();
-                    row[1] = restaurant.getRestaurantName();
-                    row[2] = ua.getUsername();
-                    row[3] = restaurant.getRestaurantManagerName();
-                    row[4] = restaurant.getRestaurantPhoneNo();
-                    row[5] = restaurant.getRestaurantAddress();
-                    row[6] = restaurant.getRestaurantLicenseNo();
+                    row[0] = r.getRestaurantId();
+                    row[1] = r.getRestaurantName();
+                    row[2] = userAccount.getUsername();
+                    row[3] = r.getRestaurantManagerName();
+                    row[4] = r.getRestaurantPhoneNo();
+                    row[5] = r.getRestaurantAddress();
+                    row[6] = r.getRestaurantLicenseNo();
                     model.addRow(row);
                 }
             }
         }
     }
 
-    public void populateusername() {
-        DefaultTableModel model = (DefaultTableModel) restaurantJTable.getModel();
-
-        model.setRowCount(0);
-
-    }
-
-
     private void addRestaurantBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRestaurantBtnActionPerformed
-        // TODO add your handling code here:
         CardLayout layout = (CardLayout) container.getLayout();
-        CreateRestaurantJPanel createRestaurantJPanel = new CreateRestaurantJPanel(container, system, restaurantDirectory);
-        container.add(createRestaurantJPanel);
+        CreateRestaurantJPanel createRest = new CreateRestaurantJPanel(container, system, restaurantDirectory);
+        container.add(createRest);
         layout.next(container);
     }//GEN-LAST:event_addRestaurantBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
         container.remove(this);
-        Component[] componentArray = container.getComponents();
-        Component component = componentArray[componentArray.length - 1];
+        Component[] compnents = container.getComponents();
+        Component component = compnents[compnents.length - 1];
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void deleteRestaurantBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRestaurantBtnActionPerformed
-        // TODO add your handling code here:
         int selectedRow = restaurantJTable.getSelectedRow();
         int count = restaurantJTable.getSelectedRowCount();
         if(count == 1){
@@ -212,12 +196,12 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
             int selectionResult = JOptionPane.showConfirmDialog(null, "Are you sure to delete??", "Warning", selectionButton);
             if (selectionResult == JOptionPane.YES_OPTION) {
                 restaurantDirectory.deleteRestaurant(selectedRow,system);
-                populate();
+                populateTable();
             }
         }
         }
          else {
-            JOptionPane.showMessageDialog(null, "Please select a Row!!");
+            JOptionPane.showMessageDialog(null, "Please select valid row from the table!!");
         }
     }//GEN-LAST:event_deleteRestaurantBtnActionPerformed
 
@@ -228,13 +212,13 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
         if(count == 1){
         if (selectedRow >= 0) {
             CardLayout layout = (CardLayout) container.getLayout();
-            Restaurant restaurant = restaurantDirectory.getRestaurantId(selectedRow);
-            ViewRestaurantsJPanel viewRestaurantsJPanel = new ViewRestaurantsJPanel(container, restaurant, restaurantDirectory);
-            container.add(viewRestaurantsJPanel);
+            Restaurant r = restaurantDirectory.getRestaurantId(selectedRow);
+            ViewRestaurantsJPanel view = new ViewRestaurantsJPanel(container, r, restaurantDirectory);
+            container.add(view);
             layout.next(container);
         }
         }else {
-            JOptionPane.showMessageDialog(null, "Please select a Row!!");
+            JOptionPane.showMessageDialog(null, "Please select valid row from the table");
         }
     }//GEN-LAST:event_viewRestaurantDetailsBtnActionPerformed
 

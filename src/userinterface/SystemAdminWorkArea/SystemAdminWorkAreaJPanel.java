@@ -24,10 +24,6 @@ import javax.swing.tree.DefaultTreeModel;
  * @author garima
  */
 public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
-
-    /**
-     * Creates new form SystemAdminWorkAreaJPanel
-     */
     JPanel userProcessContainer;
     EcoSystem ecosystem;
     CustomerDirectory customerDirectory;
