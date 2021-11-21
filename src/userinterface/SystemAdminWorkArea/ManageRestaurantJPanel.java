@@ -52,6 +52,7 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
         viewRestaurantDetailsBtn = new javax.swing.JButton();
         deleteRestaurantBtn = new javax.swing.JButton();
         backBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -110,19 +111,21 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/animation_300_kw8g3umn.gif"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(backBtn)
-                .addGap(388, 388, 388)
+                .addGap(387, 387, 387)
                 .addComponent(jLabel1)
-                .addGap(0, 522, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1051, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(addRestaurantBtn)
@@ -131,14 +134,18 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteRestaurantBtn)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(109, 109, 109))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(backBtn))
+                    .addComponent(backBtn)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -146,7 +153,9 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
                     .addComponent(addRestaurantBtn)
                     .addComponent(viewRestaurantDetailsBtn)
                     .addComponent(deleteRestaurantBtn))
-                .addGap(493, 493, 493))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(108, 108, 108))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -228,6 +237,7 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
     private javax.swing.JButton backBtn;
     private javax.swing.JButton deleteRestaurantBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable restaurantJTable;
     private javax.swing.JButton viewRestaurantDetailsBtn;

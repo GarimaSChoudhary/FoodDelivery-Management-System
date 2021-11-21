@@ -282,7 +282,6 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         int row = menuJTable.getSelectedRow();
         int count = menuJTable.getSelectedRowCount();
         if(count == 1){
